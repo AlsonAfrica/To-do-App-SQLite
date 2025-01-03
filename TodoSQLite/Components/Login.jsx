@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,13 +19,16 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("http://localhost:5000/api/users/login", {
         email,
         password,
       });
 
+      navigate("/Home");
+
+      console.log("Response:", response);
+
       if (response.data.message === "Login successful!") {
-        history.push(`/todos/${response.data.userId}`);
       }
     } catch (err) {
       setError(err.response?.data?.error || "Login failed.");
