@@ -1,61 +1,100 @@
-// Register.jsx
 import React, { useState } from "react";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import "../Styles/register.css";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-//   const history = useHistory();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!username || !password) {
-      setError("Both username and password are required.");
-      return;
-    }
+    setMessage("");
+    setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/register", {
-        username,
-        password,
-      });
-
-      if (response.data.message === "User registered successfully!") {
-        history.push("/login");
-      }
+      const response = await axios.post("http://localhost:5000/register", formData);
+      setMessage(response.data.message);
     } catch (err) {
-      setError(err.response?.data?.error || "Registration failed.");
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("An unexpected error occurred.");
+      }
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <div>{error}</div>}
-        <button type="submit">Register</button>
-      </form>
+    <div className="register-container">
+      <div className="register-card">
+        <h2>Create Account</h2>
+        <p className="subtitle">Please fill in your details to get started</p>
+        
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Choose a username"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              required
+            />
+          </div>
+
+          {message && <div className="success-message">{message}</div>}
+          {error && <div className="error-message">{error}</div>}
+
+          <button type="submit" className="register-button">
+            Create Account
+          </button>
+        </form>
+
+        <p className="login-link">
+          Already have an account? <a href="./Login">Sign in</a>
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,25 +1,23 @@
-// Login.jsx
 import React, { useState } from "react";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import "../Styles/login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-//   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!email || !password) {
       setError("Both username and password are required.");
       return;
     }
 
     try {
       const response = await axios.post("http://localhost:5000/login", {
-        username,
+        email,
         password,
       });
 
@@ -32,30 +30,47 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <div>{error}</div>}
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Welcome Back</h2>
+        <p className="subtitle">Please enter your details to sign in</p>
+        
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          
+          {error && <div className="error-message">{error}</div>}
+          
+          <button type="submit" className="login-button">
+            Sign In
+          </button>
+        </form>
+        
+        <p className="register-link">
+          Don't have an account? <a href="./Register">Sign up</a>
+        </p>
+      </div>
     </div>
   );
 };
