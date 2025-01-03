@@ -8,13 +8,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
   else console.log("Connected to SQLite database");
 });
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-  )
-`);
+
 
 // Create the todos table
 db.run(`

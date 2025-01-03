@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TodoForm from "../Components/TodoForm";
 import TodoList from "../Components/TodoList";
+import Login from "../Components/Login";
+import Register from "../Components/Register";
 
 const styles = {
   container: `
@@ -102,21 +104,21 @@ const styles = {
         margin-bottom: 1.5rem;
       }
     }
-  `
+  `,
 };
 
 const SearchIcon = () => (
-  <svg 
-    className="search-icon" 
-    fill="none" 
-    stroke="currentColor" 
+  <svg
+    className="search-icon"
+    fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
   >
-    <path 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-      strokeWidth={2} 
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
     />
   </svg>
 );
@@ -144,9 +146,7 @@ const App = () => {
       .put(`http://localhost:5000/api/todos/${id}`, { completed })
       .then(() =>
         setTodos(
-          todos.map((todo) =>
-            todo.id === id ? { ...todo, completed } : todo
-          )
+          todos.map((todo) => (todo.id === id ? { ...todo, completed } : todo))
         )
       )
       .catch((error) => console.error(error));
@@ -182,7 +182,7 @@ const App = () => {
       <div className="todo-app">
         <div className="todo-container">
           <h1 className="app-title">Task Manager</h1>
-          
+
           <div className="search-container">
             <SearchIcon />
             <input
@@ -198,7 +198,7 @@ const App = () => {
             <div className="form-section">
               <TodoForm addTodo={addTodo} />
             </div>
-            
+
             <div className="list-section">
               <TodoList
                 todos={filteredTodos}
