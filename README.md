@@ -127,11 +127,9 @@ CREATE TABLE todos (
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
-    due_date DATETIME,
     priority_color TEXT,
     completed BOOLEAN DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 ```
 
