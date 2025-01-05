@@ -134,24 +134,9 @@ CREATE TABLE todos (
 ```
 
 ## 📁 Project Structure
+<img width="214" alt="image" src="https://github.com/user-attachments/assets/2d8ad27f-e26c-4a7d-80a7-90dbec9387a9" />
 
-```
-todo-app/
-├── 📂 backend/
-│   ├── 📄 server.js
-│   ├── 📄 database.js
-│   ├── 📂 routes/
-│   │   ├── 📄 auth.js
-│   │   └── 📄 todos.js
-│   └── 📄 package.json
-└── 📂 frontend/
-    ├── 📂 public/
-    ├── 📂 src/
-    │   ├── 📂 components/
-    │   ├── 📄 App.js
-    │   └── 📄 index.js
-    └── 📄 package.json
-```
+
 
 ## 🤝 Contributing
 
