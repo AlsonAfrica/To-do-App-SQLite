@@ -49,8 +49,8 @@
 
 1️⃣ **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/task-manager-pro.git
-cd task-manager-pro
+git clone https://github.com/AlsonAfrica/To-do-App-SQLite.git
+cd To-do-App-SQLite
 ```
 
 2️⃣ **Install backend dependencies**
@@ -61,7 +61,7 @@ npm install express sqlite3 cors
 
 3️⃣ **Install frontend dependencies**
 ```bash
-cd ../frontend
+cd To-do-App-SQLite
 npm install react react-dom
 ```
 
@@ -157,7 +157,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Need help? Open an issue in the repository or contact our team:
 
 - 📧 Email: nhlakaniphoradebe337@gmail.com
-- 💬 GitHub Issues: [Create New Issue](https://github.com/yourusername/task-manager-pro/issues)
 
 ---
 
